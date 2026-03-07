@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World-R1 - Technical Details</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=block" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=block" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="tech-page">
+  <header class="hero-nav tech-nav">
+    <a class="brand" href="index.html">
+      <span class="ms-logo" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </span>
+      <span>Microsoft</span>
+    </a>
+    <nav class="hero-nav-links">
+      <a href="index.html">Home</a>
+      <a class="active" href="tech.html">Technical Details</a>
+    </nav>
+    <div class="locale-switch">
+      <a class="active" href="tech.html">EN</a>
+      <span>/</span>
+      <a href="zh-CN/tech.html">中文</a>
+    </div>
+  </header>
+
+  <main class="tech-main">
+    <section class="tech-hero-panel">
+      <p class="tech-kicker">Technical Details</p>
+      <h1>World-R1 Framework</h1>
+      <div class="tech-authors">
+        <a href="https://lhmd.top/" target="_blank" rel="noopener noreferrer">Weijie Wang<sup>1,2,*,‡</sup></a>
+        <a href="https://scholar.google.com/citations?user=Q8EDNIgAAAAJ" target="_blank" rel="noopener noreferrer">Xiaoxuan He<sup>1,*</sup></a>
+        <a href="https://github.com/Tacossp" target="_blank" rel="noopener noreferrer">Youping Gu<sup>1,*</sup></a>
+        <a href="https://steve-zeyu-zhang.github.io/" target="_blank" rel="noopener noreferrer">Zeyu Zhang<sup>3</sup></a>
+        <a href="https://hexy.tech/" target="_blank" rel="noopener noreferrer">Yefei He<sup>1</sup></a>
+        <a href="https://scholar.google.com/citations?user=r_ty-f0AAAAJ" target="_blank" rel="noopener noreferrer">Yanbo Ding<sup>2</sup></a>
+        <a href="https://scholar.google.com/citations?user=-C7R25QAAAAJ" target="_blank" rel="noopener noreferrer">Xirui Hu<sup>3</sup></a>
+        <a href="https://donydchen.github.io/" target="_blank" rel="noopener noreferrer">Donny Y. Chen<sup>3</sup></a>
+        <a href="https://www.microsoft.com/en-us/research/people/zhiyuhe/" target="_blank" rel="noopener noreferrer">Zhiyuan He<sup>2</sup></a>
+        <a href="https://www.microsoft.com/en-us/research/people/yuqyang/" target="_blank" rel="noopener noreferrer">Yuqing Yang<sup>2</sup></a>
+        <a href="https://www.microsoft.com/en-us/research/people/yifanyang/" target="_blank" rel="noopener noreferrer">Yifan Yang<sup>2,†</sup></a>
+        <a href="https://bohanzhuang.github.io/" target="_blank" rel="noopener noreferrer">Bohan Zhuang<sup>1,†</sup></a>
+      </div>
+      <p class="tech-affiliations">
+        <span><sup>1</sup> Zhejiang University</span>
+        <span><sup>2</sup> Microsoft Research</span>
+        <span><sup>3</sup> Independent Researcher</span>
+      </p>
+      <p class="tech-author-notes">
+        <span><sup>*</sup> Equal contribution</span>
+        <span><sup>†</sup> Corresponding author</span>
+        <span><sup>‡</sup> Internship at Microsoft Research</span>
+      </p>
+      <p class="tech-lead">
+        World-R1 enables geometrically consistent world modeling in video foundation models via reinforcement learning.
+      </p>
+      <div class="tech-stat-grid">
+        <article class="tech-stat-card">
+          <p class="stat-key">Training Data</p>
+          <p class="stat-value">~3,000</p>
+          <p class="stat-desc">Pure-text world-simulation prompts</p>
+        </article>
+        <article class="tech-stat-card">
+          <p class="stat-key">Dynamic Subset</p>
+          <p class="stat-value">~500</p>
+          <p class="stat-desc">High-entropy motion prompts</p>
+        </article>
+        <article class="tech-stat-card">
+          <p class="stat-key">World-R1-Small</p>
+          <p class="stat-value">48 x H200</p>
+          <p class="stat-desc">Wan2.1-T2V-1.3B backbone</p>
+        </article>
+        <article class="tech-stat-card">
+          <p class="stat-key">World-R1-Large</p>
+          <p class="stat-value">96 x H200</p>
+          <p class="stat-desc">Wan2.1-T2V-14B backbone</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section abstract-section">
+      <div class="tech-section-head">
+        <p class="section-index">01</p>
+        <h2>Abstract</h2>
+      </div>
+      <article class="panel abstract-panel">
+        <p class="abstract-text">
+          Recent video foundation models demonstrate impressive visual synthesis but frequently suffer from geometric inconsistencies.
+          While existing methods attempt to inject 3D priors via architectural modifications, they often incur high computational costs and limit scalability.
+          We propose World-R1, a framework that aligns video generation with 3D constraints through reinforcement learning.
+          To facilitate this alignment, we introduce a specialized pure text dataset tailored for world simulation.
+          Utilizing Flow-GRPO, we optimize the model using feedback from pre-trained 3D foundation models and vision-language models to enforce structural coherence without altering the underlying architecture.
+          We further employ a periodic decoupled training strategy to balance rigid geometric consistency with dynamic scene fluidity.
+          Extensive evaluations reveal that our approach significantly enhances 3D consistency while preserving the original visual quality of the foundation model, effectively bridging the gap between video generation and scalable world simulation.
+        </p>
+      </article>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">02</p>
+        <h2>Pipeline Overview</h2>
+      </div>
+      <figure class="panel media-panel full-row">
+        <img src="paper/pipeline.jpg" alt="World-R1 pipeline" />
+        <figcaption>Implicit camera prior -> candidate generation -> 3D-aware reward optimization.</figcaption>
+      </figure>
+      <article class="panel text-panel full-row">
+        <h3>Training Flow</h3>
+        <ul>
+          <li>Parse camera trajectory tokens from prompt and convert into camera extrinsics.</li>
+          <li>Project trajectory into 2D flow and inject it into initial noise using discrete transport.</li>
+          <li>Generate rollout videos with stochastic flow sampling for GRPO updates.</li>
+          <li>Jointly optimize geometry consistency and general generation quality with Flow-GRPO-Fast.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">03</p>
+        <h2>Core Components</h2>
+      </div>
+      <div class="tech-card-grid">
+        <article class="panel tech-card">
+          <h3>Implicit Camera Conditioning</h3>
+          <p>
+            Camera priors are embedded into denoising initialization instead of adding extra control networks.
+            This keeps inference path simple while improving controllability for orbit / pan / push / pull motions.
+          </p>
+        </article>
+        <article class="panel tech-card">
+          <h3>3D-Aware Reward</h3>
+          <p>
+            The reward design combines meta-view geometric integrity, reconstruction fidelity,
+            trajectory alignment, and overall visual quality to suppress 3D hallucinations.
+          </p>
+        </article>
+        <article class="panel tech-card">
+          <h3>Periodic Decoupled Training</h3>
+          <p>
+            Every 100 steps, optimization switches to a dynamic-only phase on the dynamic subset,
+            preventing rigid overfitting and preserving non-rigid motion quality.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">04</p>
+        <h2>Dataset Taxonomy</h2>
+      </div>
+      <div class="taxonomy-card-grid">
+        <article class="panel taxonomy-card">
+          <h3>Natural Landscapes</h3>
+          <ul>
+            <li>Landforms</li>
+            <li>Water Features</li>
+            <li>Weather &amp; Time</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>Urban and Architectural</h3>
+          <ul>
+            <li>Urban Landscapes</li>
+            <li>Indoor Spaces</li>
+            <li>Infrastructure</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>Micro and Still Life</h3>
+          <ul>
+            <li>Desktop Still Life</li>
+            <li>Micro World</li>
+            <li>Material Representation</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>Fantasy and Surrealism</h3>
+          <ul>
+            <li>Non-Euclidean and physics-defying scenes</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>Artistic Styles</h3>
+          <ul>
+            <li>Stylized renderings beyond photorealism</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>Dynamic Data Subset</h3>
+          <ul>
+            <li>High-entropy scenes for periodic dynamic tuning</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">05</p>
+        <h2>Quantitative Results</h2>
+      </div>
+      <figure class="panel media-panel full-row">
+        <img src="paper/table_3d.png" alt="3D consistency table" />
+        <figcaption class="table-caption">Table 1. Reconstruction-based geometry consistency evaluation.</figcaption>
+      </figure>
+      <figure class="panel media-panel full-row">
+        <img src="paper/table_vbench.png" alt="VBench results" />
+        <figcaption class="table-caption">Table 2. General video quality on VBench.</figcaption>
+      </figure>
+      <figure class="panel media-panel full-row">
+        <img src="paper/ablation.jpg" alt="Ablation study" />
+        <figcaption>Ablation on reward components and training strategy.</figcaption>
+      </figure>
+    </section>
+
+    <section id="comparison" class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">06</p>
+        <h2>Baseline Comparison Videos</h2>
+      </div>
+      <p class="tech-muted">World-R1 vs baseline models on representative prompts.</p>
+      <div id="comparison-list" class="comparison-list"></div>
+    </section>
+  </main>
+
+  <footer class="footer tech-footer">
+    <p>Copyright © Microsoft Research</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World-R1 - Video Results</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=block" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=block" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-asset-base="" class="home-page">
+  <header class="hero-nav">
+    <a class="brand" href="index.html">
+      <span class="ms-logo" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </span>
+      <span>Microsoft</span>
+    </a>
+    <nav class="hero-nav-links">
+      <a class="active" href="index.html">Home</a>
+      <a href="tech.html">Technical Details</a>
+    </nav>
+    <div class="locale-switch">
+      <a class="active" href="index.html">EN</a>
+      <span>/</span>
+      <a href="zh-CN/index.html">中文</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-video-layer" aria-hidden="true">
+      <video class="hero-video active" id="hero-video" autoplay muted loop playsinline preload="metadata"></video>
+      <video class="hero-video" id="hero-video-next" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-project">World-R1</h1>
+      <p class="hero-title">Reinforcing 3D Constraints for Text-to-Video Generation</p>
+      <div class="hero-actions">
+        <a class="action primary" href="tech.html">Tech Report</a>
+        <a class="action ghost" href="https://github.com/" target="_blank" rel="noopener noreferrer">Github</a>
+        <a class="action ghost" href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">HuggingFace</a>
+      </div>
+    </div>
+  </section>
+
+  <main id="results" class="results-main">
+    <section class="results-section">
+      <div class="section-header">
+        <p class="eyebrow">Results</p>
+      </div>
+      <div id="taxonomy-sections" class="taxonomy-sections"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Copyright © Microsoft Research</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

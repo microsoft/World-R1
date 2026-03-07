@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World-R1 - 技术细节</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=block" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=block" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body data-lang="zh" class="tech-page">
+  <header class="hero-nav tech-nav">
+    <a class="brand" href="index.html">
+      <span class="ms-logo" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </span>
+      <span>Microsoft</span>
+    </a>
+    <nav class="hero-nav-links">
+      <a href="index.html">主页</a>
+      <a class="active" href="tech.html">技术细节</a>
+    </nav>
+    <div class="locale-switch">
+      <a href="../tech.html">EN</a>
+      <span>/</span>
+      <a class="active" href="tech.html">中文</a>
+    </div>
+  </header>
+
+  <main class="tech-main">
+    <section class="tech-hero-panel">
+      <p class="tech-kicker">技术细节</p>
+      <h1>World-R1 Framework</h1>
+      <div class="tech-authors">
+        <a href="https://lhmd.top/" target="_blank" rel="noopener noreferrer">Weijie Wang<sup>1,2,*,‡</sup></a>
+        <a href="https://scholar.google.com/citations?user=Q8EDNIgAAAAJ" target="_blank" rel="noopener noreferrer">Xiaoxuan He<sup>1,*</sup></a>
+        <a href="https://github.com/Tacossp" target="_blank" rel="noopener noreferrer">Youping Gu<sup>1,*</sup></a>
+        <a href="https://steve-zeyu-zhang.github.io/" target="_blank" rel="noopener noreferrer">Zeyu Zhang<sup>3</sup></a>
+        <a href="https://hexy.tech/" target="_blank" rel="noopener noreferrer">Yefei He<sup>1</sup></a>
+        <a href="https://scholar.google.com/citations?user=r_ty-f0AAAAJ" target="_blank" rel="noopener noreferrer">Yanbo Ding<sup>2</sup></a>
+        <a href="https://scholar.google.com/citations?user=-C7R25QAAAAJ" target="_blank" rel="noopener noreferrer">Xirui Hu<sup>3</sup></a>
+        <a href="https://donydchen.github.io/" target="_blank" rel="noopener noreferrer">Donny Y. Chen<sup>3</sup></a>
+        <a href="https://www.microsoft.com/en-us/research/people/zhiyuhe/" target="_blank" rel="noopener noreferrer">Zhiyuan He<sup>2</sup></a>
+        <a href="https://www.microsoft.com/en-us/research/people/yuqyang/" target="_blank" rel="noopener noreferrer">Yuqing Yang<sup>2</sup></a>
+        <a href="https://www.microsoft.com/en-us/research/people/yifanyang/" target="_blank" rel="noopener noreferrer">Yifan Yang<sup>2,†</sup></a>
+        <a href="https://bohanzhuang.github.io/" target="_blank" rel="noopener noreferrer">Bohan Zhuang<sup>1,†</sup></a>
+      </div>
+      <p class="tech-affiliations">
+        <span><sup>1</sup> Zhejiang University</span>
+        <span><sup>2</sup> Microsoft Research</span>
+        <span><sup>3</sup> Independent Researcher</span>
+      </p>
+      <p class="tech-author-notes">
+        <span><sup>*</sup> 共同一作</span>
+        <span><sup>†</sup> 通讯作者</span>
+        <span><sup>‡</sup> 微软研究院实习</span>
+      </p>
+      <p class="tech-lead">
+        World-R1 通过强化学习实现视频基础模型中的几何一致性世界建模。
+      </p>
+      <div class="tech-stat-grid">
+        <article class="tech-stat-card">
+          <p class="stat-key">训练数据</p>
+          <p class="stat-value">~3,000</p>
+          <p class="stat-desc">纯文本世界模拟提示词</p>
+        </article>
+        <article class="tech-stat-card">
+          <p class="stat-key">动态子集</p>
+          <p class="stat-value">~500</p>
+          <p class="stat-desc">高熵动态场景提示词</p>
+        </article>
+        <article class="tech-stat-card">
+          <p class="stat-key">World-R1-Small</p>
+          <p class="stat-value">48 x H200</p>
+          <p class="stat-desc">基于 Wan2.1-T2V-1.3B</p>
+        </article>
+        <article class="tech-stat-card">
+          <p class="stat-key">World-R1-Large</p>
+          <p class="stat-value">96 x H200</p>
+          <p class="stat-desc">基于 Wan2.1-T2V-14B</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section abstract-section">
+      <div class="tech-section-head">
+        <p class="section-index">01</p>
+        <h2>摘要</h2>
+      </div>
+      <article class="panel abstract-panel">
+        <p class="abstract-text">
+          近期视频基础模型在视觉合成方面表现出色，但仍经常出现几何不一致问题。
+          现有方法通常通过架构改造注入 3D 先验，但代价较高且可扩展性受限。
+          我们提出 World-R1，通过强化学习将视频生成过程与 3D 约束对齐。
+          为支持该对齐过程，我们构建了面向世界模拟的专用纯文本数据集。
+          基于 Flow-GRPO，我们利用预训练 3D 基础模型与视觉语言模型的反馈进行优化，在不改动底层架构的前提下提升结构一致性。
+          同时，我们采用周期性解耦训练策略，在刚性几何一致性与动态场景流畅性之间取得平衡。
+          大量实验表明，该方法在保持原始视觉质量的同时显著提升 3D 一致性，有效弥合了视频生成与可扩展世界模拟之间的差距。
+        </p>
+      </article>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">02</p>
+        <h2>方法总览</h2>
+      </div>
+      <figure class="panel media-panel full-row">
+        <img src="../paper/pipeline.jpg" alt="World-R1 pipeline" />
+        <figcaption>隐式相机先验注入 -> 候选视频生成 -> 3D 奖励反馈优化。</figcaption>
+      </figure>
+      <article class="panel text-panel full-row">
+        <h3>训练流程</h3>
+        <ul>
+          <li>从文本中解析相机轨迹指令并转换为相机外参序列。</li>
+          <li>将轨迹投影为 2D 光流，并通过离散噪声传输注入初始噪声。</li>
+          <li>采用随机流采样生成 rollout 视频，用于 GRPO 更新。</li>
+          <li>联合优化几何一致性与通用生成质量，实现稳定对齐。</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">03</p>
+        <h2>核心模块</h2>
+      </div>
+      <div class="tech-card-grid">
+        <article class="panel tech-card">
+          <h3>隐式相机条件</h3>
+          <p>
+            不引入额外控制网络，而是将相机先验直接写入去噪初始化，
+            在保持推理路径简洁的同时提升 orbit / pan / push / pull 等控制能力。
+          </p>
+        </article>
+        <article class="panel tech-card">
+          <h3>3D 感知奖励</h3>
+          <p>
+            奖励由元视角几何完整性、重建保真、轨迹对齐以及整体视觉质量共同构成，
+            用于抑制几何幻觉并提升结构稳定性。
+          </p>
+        </article>
+        <article class="panel tech-card">
+          <h3>周期性解耦训练</h3>
+          <p>
+            每 100 步切换到动态子集阶段，缓解过强几何约束导致的动态退化，
+            保持非刚体运动的自然与流畅。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">04</p>
+        <h2>数据集分类</h2>
+      </div>
+      <div class="taxonomy-card-grid">
+        <article class="panel taxonomy-card">
+          <h3>自然景观</h3>
+          <ul>
+            <li>地貌</li>
+            <li>水体景观</li>
+            <li>天气与时间</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>城市与建筑</h3>
+          <ul>
+            <li>城市场景</li>
+            <li>室内空间</li>
+            <li>基础设施</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>微观与静物</h3>
+          <ul>
+            <li>桌面静物</li>
+            <li>微观世界</li>
+            <li>材质表现</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>幻想与超现实</h3>
+          <ul>
+            <li>非欧几里得与超现实物理场景</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>艺术风格</h3>
+          <ul>
+            <li>风格化渲染与审美多样性</li>
+          </ul>
+        </article>
+        <article class="panel taxonomy-card">
+          <h3>动态数据子集</h3>
+          <ul>
+            <li>用于周期性动态阶段的高熵场景</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">05</p>
+        <h2>定量结果</h2>
+      </div>
+      <figure class="panel media-panel full-row">
+        <img src="../paper/table_3d.png" alt="3D consistency table" />
+        <figcaption class="table-caption">表 1：基于重建的一致性指标评测结果。</figcaption>
+      </figure>
+      <figure class="panel media-panel full-row">
+        <img src="../paper/table_vbench.png" alt="VBench results" />
+        <figcaption class="table-caption">表 2：VBench 通用视频质量评测结果。</figcaption>
+      </figure>
+      <figure class="panel media-panel full-row">
+        <img src="../paper/ablation.jpg" alt="Ablation study" />
+        <figcaption>奖励组件与训练策略的消融分析。</figcaption>
+      </figure>
+    </section>
+
+    <section id="comparison" class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">06</p>
+        <h2>基线对比视频</h2>
+      </div>
+      <p class="tech-muted">World-R1 与基线模型在代表性提示词上的对比。</p>
+      <div id="comparison-list" class="comparison-list"></div>
+    </section>
+  </main>
+
+  <footer class="footer tech-footer">
+    <p>Copyright © Microsoft Research</p>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
