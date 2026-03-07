@@ -97,7 +97,7 @@ video {
 
 .hero-nav-links {
   display: flex;
-  gap: 8px;
+  gap: 18px;
   font-size: 13px;
   font-weight: 600;
   justify-self: center;
@@ -221,7 +221,7 @@ video {
 }
 
 .hero-title {
-  font-size: clamp(24px, 3.5vw, 50px);
+  font-size: clamp(24px, 3vw, 80px);
   line-height: 1.06;
   letter-spacing: -0.01em;
   margin-bottom: 34px;
@@ -240,7 +240,7 @@ video {
   flex-wrap: wrap;
   justify-content: center;
   gap: 18px;
-  margin-top: 10px;
+  margin-top: 80px;
 }
 
 .action {
@@ -788,7 +788,7 @@ video {
 
   .hero-nav-links {
     font-size: 12px;
-    gap: 6px;
+    gap: 10px;
   }
 
   .hero-nav-links a {
@@ -822,6 +822,10 @@ video {
     min-width: 114px;
     padding: 10px 14px;
     font-size: 12px;
+  }
+
+  .hero-actions {
+    margin-top: 18px;
   }
 
   .results-main {
