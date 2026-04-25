@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>World-R1 - Technical Details</title>
+  <title>World-R1 Technical Report | 3D-Consistent Text-to-Video Generation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=block" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=block" rel="stylesheet" />
+  <link rel="icon" href="assets/microsoft-color.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="tech-page">
   <header class="hero-nav tech-nav">
     <a class="brand" href="index.html">
-      <span class="ms-logo" aria-hidden="true">
-        <span></span><span></span><span></span><span></span>
-      </span>
-      <span>Microsoft</span>
+      <img class="brand-logo" src="assets/microsoft-logo-svgrepo-com.svg" alt="Microsoft" />
     </a>
     <nav class="hero-nav-links">
       <a href="index.html">Home</a>
       <a class="active" href="tech.html">Technical Details</a>
+      <a href="team.html">Team</a>
     </nav>
     <div class="locale-switch">
       <a class="active" href="tech.html">EN</a>
@@ -32,20 +31,20 @@
   <main class="tech-main">
     <section class="tech-hero-panel">
       <p class="tech-kicker">Technical Details</p>
-      <h1>World-R1 Framework</h1>
+      <h1>World-R1: Reinforcing 3D Constraints for Text-to-Video Generation</h1>
       <div class="tech-authors">
-        <a href="https://lhmd.top/" target="_blank" rel="noopener noreferrer">Weijie Wang<sup>1,2,*,‡</sup></a>
-        <a href="https://scholar.google.com/citations?user=Q8EDNIgAAAAJ" target="_blank" rel="noopener noreferrer">Xiaoxuan He<sup>1,*</sup></a>
+        <a href="https://lhmd.top/" target="_blank" rel="noopener noreferrer">Weijie Wang<sup>1,2,*,†</sup></a>
+        <a href="https://github.com/Shredded-Pork" target="_blank" rel="noopener noreferrer">Xiaoxuan He<sup>1,*</sup></a>
         <a href="https://github.com/Tacossp" target="_blank" rel="noopener noreferrer">Youping Gu<sup>1,*</sup></a>
+        <a href="https://www.microsoft.com/en-us/research/people/yifanyang/" target="_blank" rel="noopener noreferrer">Yifan Yang<sup>2,‡</sup></a>
         <a href="https://steve-zeyu-zhang.github.io/" target="_blank" rel="noopener noreferrer">Zeyu Zhang<sup>3</sup></a>
-        <a href="https://hexy.tech/" target="_blank" rel="noopener noreferrer">Yefei He<sup>1</sup></a>
-        <a href="https://scholar.google.com/citations?user=r_ty-f0AAAAJ" target="_blank" rel="noopener noreferrer">Yanbo Ding<sup>2</sup></a>
-        <a href="https://scholar.google.com/citations?user=-C7R25QAAAAJ" target="_blank" rel="noopener noreferrer">Xirui Hu<sup>3</sup></a>
+        <a href="https://openreview.net/profile?id=~Yefei_He1" target="_blank" rel="noopener noreferrer">Yefei He<sup>1</sup></a>
+        <a href="https://github.com/DINGYANB" target="_blank" rel="noopener noreferrer">Yanbo Ding<sup>2</sup></a>
+        <a href="https://openreview.net/profile?id=~Xirui_Hu1" target="_blank" rel="noopener noreferrer">Xirui Hu<sup>3</sup></a>
         <a href="https://donydchen.github.io/" target="_blank" rel="noopener noreferrer">Donny Y. Chen<sup>3</sup></a>
         <a href="https://www.microsoft.com/en-us/research/people/zhiyuhe/" target="_blank" rel="noopener noreferrer">Zhiyuan He<sup>2</sup></a>
         <a href="https://www.microsoft.com/en-us/research/people/yuqyang/" target="_blank" rel="noopener noreferrer">Yuqing Yang<sup>2</sup></a>
-        <a href="https://www.microsoft.com/en-us/research/people/yifanyang/" target="_blank" rel="noopener noreferrer">Yifan Yang<sup>2,†</sup></a>
-        <a href="https://bohanzhuang.github.io/" target="_blank" rel="noopener noreferrer">Bohan Zhuang<sup>1,†</sup></a>
+        <a href="https://bohanzhuang.github.io/" target="_blank" rel="noopener noreferrer">Bohan Zhuang<sup>1,‡</sup></a>
       </div>
       <p class="tech-affiliations">
         <span><sup>1</sup> Zhejiang University</span>
@@ -54,11 +53,11 @@
       </p>
       <p class="tech-author-notes">
         <span><sup>*</sup> Equal contribution</span>
-        <span><sup>†</sup> Corresponding author</span>
-        <span><sup>‡</sup> Internship at Microsoft Research</span>
+        <span><sup>†</sup> Work done during an internship at MSRA</span>
+        <span><sup>‡</sup> Corresponding authors</span>
       </p>
       <p class="tech-lead">
-        World-R1 enables geometrically consistent world modeling in video foundation models via reinforcement learning.
+        World-R1 aligns text-to-video generation with 3D constraints through reinforcement learning, without changing the base architecture or adding inference-time 3D control modules.
       </p>
       <div class="tech-stat-grid">
         <article class="tech-stat-card">
@@ -72,14 +71,24 @@
           <p class="stat-desc">High-entropy motion prompts</p>
         </article>
         <article class="tech-stat-card">
-          <p class="stat-key">World-R1-Small</p>
-          <p class="stat-value">48 x H200</p>
-          <p class="stat-desc">Wan2.1-T2V-1.3B backbone</p>
+          <p class="stat-key">3D Consistency</p>
+          <p class="stat-value">27.67</p>
+          <p class="stat-desc">Best PSNR from World-R1-Large</p>
         </article>
         <article class="tech-stat-card">
-          <p class="stat-key">World-R1-Large</p>
-          <p class="stat-value">96 x H200</p>
-          <p class="stat-desc">Wan2.1-T2V-14B backbone</p>
+          <p class="stat-key">MVCS</p>
+          <p class="stat-value">0.993</p>
+          <p class="stat-desc">Reconstruction-independent consistency</p>
+        </article>
+        <article class="tech-stat-card">
+          <p class="stat-key">User Preference</p>
+          <p class="stat-value">86%</p>
+          <p class="stat-desc">Overall win rate over Wan2.1</p>
+        </article>
+        <article class="tech-stat-card">
+          <p class="stat-key">Backbones</p>
+          <p class="stat-value">1.3B / 14B</p>
+          <p class="stat-desc">Wan2.1 variants trained on 48 / 96 H200 GPUs</p>
         </article>
       </div>
     </section>
@@ -108,16 +117,17 @@
         <h2>Pipeline Overview</h2>
       </div>
       <figure class="panel media-panel full-row">
-        <img src="paper/pipeline.jpg" alt="World-R1 pipeline" />
-        <figcaption>Implicit camera prior -> candidate generation -> 3D-aware reward optimization.</figcaption>
+        <img src="assets/pipeline.jpg" alt="World-R1 pipeline" />
+        <figcaption>Text prompt -> implicit camera conditioning -> rollout video generation -> 3D-aware and general rewards -> Flow-GRPO-Fast update.</figcaption>
       </figure>
       <article class="panel text-panel full-row">
         <h3>Training Flow</h3>
         <ul>
-          <li>Parse camera trajectory tokens from prompt and convert into camera extrinsics.</li>
-          <li>Project trajectory into 2D flow and inject it into initial noise using discrete transport.</li>
-          <li>Generate rollout videos with stochastic flow sampling for GRPO updates.</li>
-          <li>Jointly optimize geometry consistency and general generation quality with Flow-GRPO-Fast.</li>
+          <li>Parse text motion tokens into deterministic camera extrinsics, then project the trajectory into dense optical flow.</li>
+          <li>Inject the camera prior into the initial latent noise with discrete noise transport, without adding a control network.</li>
+          <li>Generate grouped rollout videos with stochastic Flow-GRPO-Fast sampling.</li>
+          <li>Lift videos with Depth Anything 3 into 3DGS and score meta-view plausibility, reconstruction fidelity, and trajectory alignment.</li>
+          <li>Combine the 3D-aware reward with HPSv3 visual-quality feedback, then periodically train on dynamic prompts using only the general reward.</li>
         </ul>
       </article>
     </section>
@@ -131,22 +141,25 @@
         <article class="panel tech-card">
           <h3>Implicit Camera Conditioning</h3>
           <p>
-            Camera priors are embedded into denoising initialization instead of adding extra control networks.
-            This keeps inference path simple while improving controllability for orbit / pan / push / pull motions.
+            Prompt-specified push, pull, pan, move, and orbit motions are converted into camera trajectories and written into the initial noise through trajectory-guided wrapping.
           </p>
         </article>
         <article class="panel tech-card">
           <h3>3D-Aware Reward</h3>
           <p>
-            The reward design combines meta-view geometric integrity, reconstruction fidelity,
-            trajectory alignment, and overall visual quality to suppress 3D hallucinations.
+            Depth Anything 3 reconstructs generated clips as 3DGS; Qwen3-VL evaluates meta-views, LPIPS measures re-rendering fidelity, and trajectory scores check camera control.
+          </p>
+        </article>
+        <article class="panel tech-card">
+          <h3>General Quality Reward</h3>
+          <p>
+            HPSv3 scores the generated frames so RL alignment improves geometry without sacrificing aesthetic quality, subject consistency, and motion smoothness.
           </p>
         </article>
         <article class="panel tech-card">
           <h3>Periodic Decoupled Training</h3>
           <p>
-            Every 100 steps, optimization switches to a dynamic-only phase on the dynamic subset,
-            preventing rigid overfitting and preserving non-rigid motion quality.
+            Every 100 steps, the 3D-aware reward is temporarily disabled and the model is optimized on roughly 500 high-entropy dynamic prompts with the general reward only.
           </p>
         </article>
       </div>
@@ -155,6 +168,27 @@
     <section class="tech-section">
       <div class="tech-section-head">
         <p class="section-index">04</p>
+        <h2>3D Reconstruction Diagnostics</h2>
+      </div>
+      <div class="tech-figure-grid">
+        <figure class="panel media-panel">
+          <img src="assets/recon_good.jpg" alt="High-fidelity reconstruction from World-R1" />
+          <figcaption>World-R1 produces dense and stable 3D reconstructions from generated videos.</figcaption>
+        </figure>
+        <figure class="panel media-panel">
+          <img src="assets/recon_bad.jpg" alt="Reconstruction failure from an inconsistent baseline video" />
+          <figcaption>Geometric hallucinations in baseline videos lead to sparse point clouds and unstable reconstructions.</figcaption>
+        </figure>
+        <figure class="panel media-panel full-row">
+          <img src="assets/appendix_meta.jpg" alt="Meta-view reward visualization" />
+          <figcaption>Meta-view evaluation exposes 3D failures that can appear plausible in the original view.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">05</p>
         <h2>Dataset Taxonomy</h2>
       </div>
       <div class="taxonomy-card-grid">
@@ -205,26 +239,67 @@
 
     <section class="tech-section">
       <div class="tech-section-head">
-        <p class="section-index">05</p>
+        <p class="section-index">06</p>
         <h2>Quantitative Results</h2>
       </div>
       <figure class="panel media-panel full-row">
-        <img src="paper/table_3d.png" alt="3D consistency table" />
+        <img src="assets/table_3d.png" alt="3D consistency table" />
         <figcaption class="table-caption">Table 1. Reconstruction-based geometry consistency evaluation.</figcaption>
       </figure>
       <figure class="panel media-panel full-row">
-        <img src="paper/table_vbench.png" alt="VBench results" />
+        <img src="assets/table_vbench.png" alt="VBench results" />
         <figcaption class="table-caption">Table 2. General video quality on VBench.</figcaption>
       </figure>
       <figure class="panel media-panel full-row">
-        <img src="paper/ablation.jpg" alt="Ablation study" />
+        <img src="assets/ablation.jpg" alt="Ablation study" />
         <figcaption>Ablation on reward components and training strategy.</figcaption>
       </figure>
+      <div class="finding-grid">
+        <article class="panel finding-card">
+          <p class="stat-key">3D Reconstruction</p>
+          <h3>27.67 PSNR / 0.865 SSIM / 0.162 LPIPS</h3>
+          <p>World-R1-Large substantially improves geometry consistency over Wan2.1-T2V-14B.</p>
+        </article>
+        <article class="panel finding-card">
+          <p class="stat-key">Small Variant</p>
+          <h3>+10.23 dB PSNR</h3>
+          <p>World-R1-Small reaches 27.63 PSNR and 0.858 SSIM on the 3D consistency benchmark.</p>
+        </article>
+        <article class="panel finding-card">
+          <p class="stat-key">VBench</p>
+          <h3>65.74 aesthetic / 67.53 imaging</h3>
+          <p>The RL-aligned model preserves general video quality while improving subject consistency to 97.58.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="tech-section">
+      <div class="tech-section-head">
+        <p class="section-index">07</p>
+        <h2>Human and Robustness Analyses</h2>
+      </div>
+      <div class="finding-grid">
+        <article class="panel finding-card">
+          <p class="stat-key">User Study</p>
+          <h3>92% geometry / 76% control / 86% overall</h3>
+          <p>25 participants compared World-R1 with Wan2.1 on 30 complex prompts in a blind 2AFC setup.</p>
+        </article>
+        <article class="panel finding-card">
+          <p class="stat-key">Metric Validation</p>
+          <h3>91.17% agreement</h3>
+          <p>Human 3D-consistency preference aligns with the automatic metric ranking across 20 participants and 30 randomized pairs.</p>
+        </article>
+        <article class="panel finding-card">
+          <p class="stat-key">Long Video</p>
+          <h3>121-frame generalization</h3>
+          <p>World-R1-Large improves long-video PSNR from 18.32 to 26.32 against the Wan2.1-T2V-14B backbone.</p>
+        </article>
+      </div>
     </section>
 
     <section id="comparison" class="tech-section">
       <div class="tech-section-head">
-        <p class="section-index">06</p>
+        <p class="section-index">08</p>
         <h2>Baseline Comparison Videos</h2>
       </div>
       <p class="tech-muted">World-R1 vs baseline models on representative prompts.</p>

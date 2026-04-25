@@ -54,7 +54,7 @@ const taxonomyI18n = {
 
 const uiText = {
   emptyCard: isZh ? "可在 main.js 中补充该子类视频内容" : "Add videos for this sub-category in main.js",
-  promptPrefix: isZh ? "提示词 - " : "Prompt - "
+  promptPrefix: isZh ? "提示词：" : "Prompt: "
 };
 
 const taxonomySections = [
@@ -67,16 +67,16 @@ const taxonomySections = [
         chip: "Landforms",
         items: [
           {
-            src: "videos/examples/0000_camera_push_in_then_pan_right_deep_canyon_walls_made_of_laye.mp4",
-            prompt: "camera push in then pan right - deep canyon walls made of layered rock"
+            src: "videos/examples/0000.mp4",
+            prompt: "camera move left - deep canyon walls made of layered rock"
           },
           {
-            src: "videos/examples/0004_camera_move_right_pull_out_then_pan_right_a_vast_polar_ice_f.mp4",
-            prompt: "camera move right pull out then pan right - vast polar ice field"
+            src: "videos/examples/0004.mp4",
+            prompt: "camera push in - vast polar ice field"
           },
           {
-            src: "videos/examples/0018_camera_push_in_a_forest_of_towering_fungi_that_glow_with_sof.mp4",
-            prompt: "camera push in - forest of towering fungi glowing softly"
+            src: "videos/examples/0018.mp4",
+            prompt: "camera orbit right then push in - forest of towering fungi glowing softly"
           }
         ]
       },
@@ -85,12 +85,16 @@ const taxonomySections = [
         chip: "Water",
         items: [
           {
-            src: "videos/examples/0001_camera_orbit_left_a_powerful_waterfall_cascading_down_a_moss.mp4",
-            prompt: "camera orbit left - powerful waterfall cascading down a moss cliff"
+            src: "videos/examples/0001.mp4",
+            prompt: "powerful waterfall cascading down a moss cliff"
           },
           {
-            src: "videos/examples/0002_camera_pull_out_then_move_left_deep_sea_coral_reefs_teeming_.mp4",
-            prompt: "camera pull out then move left - deep sea coral reefs"
+            src: "videos/examples/0002.mp4",
+            prompt: "camera push in - deep sea coral reefs"
+          },
+          {
+            src: "videos/examples/0130.mp4",
+            prompt: "camera push in - dramatic ocean whirlpool"
           }
         ]
       },
@@ -99,8 +103,16 @@ const taxonomySections = [
         chip: "Atmosphere",
         items: [
           {
-            src: "videos/examples/0003_camera_pan_right_wide_grasslands_under_a_dramatic_sky_filled.mp4",
-            prompt: "camera pan right - wide grasslands under a dramatic sky"
+            src: "videos/examples/0100.mp4",
+            prompt: "camera orbit right - field of wildflowers"
+          },
+          {
+            src: "videos/examples/0234.mp4",
+            prompt: "camera pan left - starry night reflected over a calm lake"
+          },
+          {
+            src: "videos/examples/0259.mp4",
+            prompt: "camera move left - falling snow in a forest at night"
           }
         ]
       }
@@ -115,16 +127,16 @@ const taxonomySections = [
         chip: "Urban",
         items: [
           {
-            src: "videos/examples/0005_camera_move_left_a_charming_european_medieval_town_square_wi.mp4",
-            prompt: "camera move left - charming European medieval town square"
+            src: "videos/examples/0005.mp4",
+            prompt: "camera orbit right - charming European medieval town square"
           },
           {
-            src: "videos/examples/0006_camera_push_in_then_pan_left_modernist_glass_skyscrapers_ref.mp4",
-            prompt: "camera push in then pan left - modernist glass skyscrapers"
+            src: "videos/examples/0006.mp4",
+            prompt: "camera move left - modernist glass skyscrapers"
           },
           {
-            src: "videos/examples/0019_camera_orbit_left_then_move_right_a_futuristic_city_built_fr.mp4",
-            prompt: "camera orbit left then move right - futuristic city"
+            src: "videos/examples/0019.mp4",
+            prompt: "camera push in - futuristic city"
           }
         ]
       },
@@ -133,12 +145,16 @@ const taxonomySections = [
         chip: "Indoor",
         items: [
           {
-            src: "videos/examples/0007_camera_pull_out_the_interior_of_a_magnificent_gothic_cathedr.mp4",
-            prompt: "camera pull out - interior of a magnificent gothic cathedral"
+            src: "videos/examples/0458.mp4",
+            prompt: "camera move left - audience in an opera house"
           },
           {
-            src: "videos/examples/0008_camera_orbit_right_then_push_in_a_cozy_attic_study_filled_wi.mp4",
-            prompt: "camera orbit right then push in - cozy attic study"
+            src: "videos/examples/0432.mp4",
+            prompt: "camera push in - dinosaur skeleton exhibit"
+          },
+          {
+            src: "videos/examples/0455.mp4",
+            prompt: "camera move left - washing machines in a laundromat"
           }
         ]
       },
@@ -147,8 +163,16 @@ const taxonomySections = [
         chip: "Infra",
         items: [
           {
-            src: "videos/examples/0009_camera_move_left_pull_out_then_pan_left_a_deserted_industria.mp4",
-            prompt: "camera move left pull out then pan left - deserted industrial complex"
+            src: "videos/examples/0009.mp4",
+            prompt: "camera pan left - deserted industrial complex"
+          },
+          {
+            src: "videos/examples/0574.mp4",
+            prompt: "camera move left - vast bridge span"
+          },
+          {
+            src: "videos/examples/0560.mp4",
+            prompt: "camera move left - bus stop"
           }
         ]
       }
@@ -163,12 +187,16 @@ const taxonomySections = [
         chip: "Still Life",
         items: [
           {
-            src: "videos/examples/0010_camera_push_in_a_delicate_afternoon_tea_set_with_macarons_an.mp4",
-            prompt: "camera push in - delicate afternoon tea set with macarons"
+            src: "videos/examples/0010.mp4",
+            prompt: "delicate afternoon tea set with macarons"
           },
           {
-            src: "videos/examples/0011_camera_pan_right_then_orbit_left_dried_wildflowers_arranged_.mp4",
-            prompt: "camera pan right then orbit left - dried wildflowers arrangement"
+            src: "videos/examples/0011.mp4",
+            prompt: "dried wildflowers arrangement"
+          },
+          {
+            src: "videos/examples/0511.mp4",
+            prompt: "camera move right then push in - candle still life"
           }
         ]
       },
@@ -177,12 +205,16 @@ const taxonomySections = [
         chip: "Micro",
         items: [
           {
-            src: "videos/examples/0012_camera_move_right_a_miniature_tilt_shift_landscape_model_of_.mp4",
-            prompt: "camera move right - miniature tilt-shift landscape model"
+            src: "videos/examples/0012.mp4",
+            prompt: "camera move left - miniature tilt-shift landscape model"
           },
           {
-            src: "videos/examples/0013_camera_pull_out_then_pan_left_the_complex_internal_structure.mp4",
-            prompt: "camera pull out then pan left - complex internal structure"
+            src: "videos/examples/0013.mp4",
+            prompt: "complex internal structure"
+          },
+          {
+            src: "videos/examples/0754.mp4",
+            prompt: "camera orbit right - crystalline micro structure"
           }
         ]
       },
@@ -191,12 +223,16 @@ const taxonomySections = [
         chip: "Material",
         items: [
           {
-            src: "videos/examples/0014_camera_orbit_right_ice_cubes_floating_in_a_glass_of_whiskey_.mp4",
+            src: "videos/examples/0014.mp4",
             prompt: "camera orbit right - ice cubes floating in whiskey"
           },
           {
-            src: "videos/examples/0015_camera_push_in_then_fixed_heavy_silk_curtains_with_an_embroi.mp4",
-            prompt: "camera push in then fixed - heavy silk curtains with embroidery"
+            src: "videos/examples/0844.mp4",
+            prompt: "camera orbit left - diamond gemstone"
+          },
+          {
+            src: "videos/examples/0523.mp4",
+            prompt: "camera push in then move left - faucet close-up"
           }
         ]
       }
@@ -211,16 +247,16 @@ const taxonomySections = [
         chip: "Fantasy",
         items: [
           {
-            src: "videos/examples/0016_camera_pan_left_surreal_melting_clocks_draped_over_tree_bran.mp4",
-            prompt: "camera pan left - surreal melting clocks draped over branches"
+            src: "videos/examples/0016.mp4",
+            prompt: "camera pull out - surreal melting clocks draped over branches"
           },
           {
-            src: "videos/examples/0017_camera_move_right_pull_out_then_pan_right_giant_spheres_of_s.mp4",
-            prompt: "camera move right pull out then pan right - giant surreal spheres"
+            src: "videos/examples/0972.mp4",
+            prompt: "camera orbit left - floating monastery above the clouds"
           },
           {
-            src: "videos/examples/0020_camera_pull_out_then_pan_right_a_whimsical_city_constructed_.mp4",
-            prompt: "camera pull out then pan right - whimsical cityscape"
+            src: "videos/examples/0020.mp4",
+            prompt: "camera pull out - whimsical cityscape"
           }
         ]
       }
@@ -235,16 +271,16 @@ const taxonomySections = [
         chip: "Style",
         items: [
           {
-            src: "videos/examples/0021_camera_pan_right_a_water_lily_pond_with_a_japanese_bridge_pa.mp4",
-            prompt: "camera pan right - water lily pond with Japanese bridge"
+            src: "videos/examples/0021.mp4",
+            prompt: "water lily pond with Japanese bridge"
           },
           {
-            src: "videos/examples/0022_camera_orbit_right_then_push_in_a_traditional_chinese_ink_wa.mp4",
-            prompt: "camera orbit right then push in - traditional Chinese ink-wash scene"
+            src: "videos/examples/0022.mp4",
+            prompt: "camera push in - traditional Chinese ink-wash scene"
           },
           {
-            src: "videos/examples/0023_camera_move_left_then_pull_out_a_japanese_ukiyo_e_woodblock_.mp4",
-            prompt: "camera move left then pull out - Japanese ukiyo-e woodblock style"
+            src: "videos/examples/0023.mp4",
+            prompt: "static camera - Japanese ukiyo-e woodblock style"
           }
         ]
       }
@@ -259,28 +295,28 @@ const taxonomySections = [
         chip: "Dynamic",
         items: [
           {
-            src: "videos/dynamic/0000_camera_push_in_a_lion_roaring_with_its_mane_shaking_in_the_w.mp4",
-            prompt: "camera push in - lion roaring with mane shaking in the wind"
+            src: "videos/dynamic/0000.mp4",
+            prompt: "lion roaring with mane shaking in the wind"
           },
           {
-            src: "videos/dynamic/0008_camera_pan_left_soldiers_marching_in_synchronization_across_.mp4",
-            prompt: "camera pan left - soldiers marching in synchronization"
+            src: "videos/dynamic/0008.mp4",
+            prompt: "soldiers marching in synchronization"
           },
           {
-            src: "videos/dynamic/0013_camera_pan_right_then_orbit_left_a_drone_flying_through_a_co.mp4",
-            prompt: "camera pan right then orbit left - drone flying through a corridor"
+            src: "videos/dynamic/0013.mp4",
+            prompt: "drone flying through a corridor"
           },
           {
-            src: "videos/dynamic/0014_camera_move_left_a_bartender_shaking_a_cocktail_mixer_vigoro.mp4",
-            prompt: "camera move left - bartender shaking a cocktail mixer"
+            src: "videos/dynamic/0011.mp4",
+            prompt: "hacker typing furiously on a keyboard"
           },
           {
-            src: "videos/dynamic/0020_camera_move_right_pull_out_then_pan_right_a_fighter_jet_perf.mp4",
-            prompt: "camera move right pull out then pan right - fighter jet performance"
+            src: "videos/dynamic/0020.mp4",
+            prompt: "fighter jet performance"
           },
           {
-            src: "videos/dynamic/0034_camera_pull_out_a_flock_of_birds_taking_off_from_a_lake.mp4",
-            prompt: "camera pull out - flock of birds taking off from a lake"
+            src: "videos/dynamic/0034.mp4",
+            prompt: "flock of birds taking off from a lake"
           }
         ]
       }
@@ -290,81 +326,100 @@ const taxonomySections = [
 
 const comparisonRows = [
   {
-    prompt: "camera push in then pan right - deep canyon walls made of layered rock",
+    prompt: "Camera push in. Deep canyon walls made of layered red rock, with a winding river at the bottom.",
     models: [
       {
-        name: "World-R1 Large",
-        src: "videos/baseline_comparation/world-r1-large/0000_camera_push_in_then_pan_right_deep_canyon_walls_made_of_laye.mp4"
+        name: "World-R1-Large",
+        src: "videos/baseline_comparation/world-r1-large/0000.mp4"
       },
       {
-        name: "Wan 2.2 14B",
-        src: "videos/baseline_comparation/wan2.2-14b/0000_camera_push_in_then_pan_right_deep_canyon_walls_made_of_laye.mp4"
+        name: "Wan2.2-T2V-14B",
+        src: "videos/baseline_comparation/wan2.2-14b/0000.mp4"
       },
       {
-        name: "Wan 2.1 14B",
-        src: "videos/baseline_comparation/wan2.1-14b/0000_camera_push_in_then_pan_right_deep_canyon_walls_made_of_laye.mp4"
+        name: "Wan2.1-T2V-14B",
+        src: "videos/baseline_comparation/wan2.1-14b/0000.mp4"
       }
     ]
   },
   {
-    prompt: "camera pull out then move left - deep sea coral reefs teeming",
+    prompt: "Camera orbit left, then push in. Deep sea coral reefs teeming with colorful fish and bioluminescent plant life.",
     models: [
       {
-        name: "World-R1 Large",
-        src: "videos/baseline_comparation/world-r1-large/0002_camera_pull_out_then_move_left_deep_sea_coral_reefs_teeming_.mp4"
+        name: "World-R1-Large",
+        src: "videos/baseline_comparation/world-r1-large/0002.mp4"
       },
       {
-        name: "Wan 2.2 14B",
-        src: "videos/baseline_comparation/wan2.2-14b/0002_camera_pull_out_then_move_left_deep_sea_coral_reefs_teeming_.mp4"
+        name: "Wan2.2-T2V-14B",
+        src: "videos/baseline_comparation/wan2.2-14b/0002.mp4"
       },
       {
-        name: "Wan 2.1 14B",
-        src: "videos/baseline_comparation/wan2.1-14b/0002_camera_pull_out_then_move_left_deep_sea_coral_reefs_teeming_.mp4"
+        name: "Wan2.1-T2V-14B",
+        src: "videos/baseline_comparation/wan2.1-14b/0002.mp4"
       }
     ]
   },
   {
-    prompt: "camera push in then pan left - modernist glass skyscrapers",
+    prompt: "Camera move left. Modernist glass skyscrapers reflecting the Shanghai Bund waterfront during golden hour.",
     models: [
       {
-        name: "World-R1 Small",
-        src: "videos/baseline_comparation/world-r1-small/0006_camera_push_in_then_pan_left_modernist_glass_skyscrapers_ref.mp4"
+        name: "World-R1-Small",
+        src: "videos/baseline_comparation/world-r1-small/0006.mp4"
       },
       {
-        name: "Wan 2.1 1.3B",
-        src: "videos/baseline_comparation/wan2.1-1.3b/0006_camera_push_in_then_pan_left_modernist_glass_skyscrapers_ref.mp4"
+        name: "Wan2.1-T2V-1.3B",
+        src: "videos/baseline_comparation/wan2.1-1.3b/0006.mp4"
       },
       {
-        name: "CogVideoX 1.5 5B",
-        src: "videos/baseline_comparation/cogvideox-1.5-5b/0006_camera_push_in_then_pan_left_modernist_glass_skyscrapers_ref.mp4"
+        name: "CogVideoX-1.5-5B",
+        src: "videos/baseline_comparation/cogvideox-1.5-5b/0006.mp4"
       }
     ]
   },
   {
-    prompt: "camera orbit left then move right - futuristic city",
+    prompt: "Camera orbit left. A futuristic city built from crystal structures under the light of the sunset.",
     models: [
       {
-        name: "World-R1 Small",
-        src: "videos/baseline_comparation/world-r1-small/0019_camera_orbit_left_then_move_right_a_futuristic_city_built_fr.mp4"
+        name: "World-R1-Small",
+        src: "videos/baseline_comparation/world-r1-small/0019.mp4"
       },
       {
-        name: "Wan 2.1 1.3B",
-        src: "videos/baseline_comparation/wan2.1-1.3b/0019_camera_orbit_left_then_move_right_a_futuristic_city_built_fr.mp4"
+        name: "Wan2.1-T2V-1.3B",
+        src: "videos/baseline_comparation/wan2.1-1.3b/0019.mp4"
       },
       {
-        name: "CogVideoX 1.5 5B",
-        src: "videos/baseline_comparation/cogvideox-1.5-5b/0019_camera_orbit_left_then_move_right_a_futuristic_city_built_fr.mp4"
+        name: "CogVideoX-1.5-5B",
+        src: "videos/baseline_comparation/cogvideox-1.5-5b/0019.mp4"
       }
     ]
   }
 ];
 
 const heroSources = [
-  "videos/examples/0001_camera_orbit_left_a_powerful_waterfall_cascading_down_a_moss.mp4",
-  "videos/examples/0006_camera_push_in_then_pan_left_modernist_glass_skyscrapers_ref.mp4",
-  "videos/examples/0016_camera_pan_left_surreal_melting_clocks_draped_over_tree_bran.mp4",
-  "videos/examples/0022_camera_orbit_right_then_push_in_a_traditional_chinese_ink_wa.mp4",
-  "videos/dynamic/0000_camera_push_in_a_lion_roaring_with_its_mane_shaking_in_the_w.mp4"
+  "videos/examples/0000.mp4",
+  "videos/examples/0001.mp4",
+  "videos/examples/0002.mp4",
+  "videos/examples/0004.mp4",
+  "videos/examples/0005.mp4",
+  "videos/examples/0006.mp4",
+  "videos/examples/0009.mp4",
+  "videos/examples/0018.mp4",
+  "videos/examples/0019.mp4",
+  "videos/examples/0100.mp4",
+  "videos/examples/0130.mp4",
+  "videos/examples/0234.mp4",
+  "videos/examples/0259.mp4",
+  "videos/examples/0432.mp4",
+  "videos/examples/0455.mp4",
+  "videos/examples/0458.mp4",
+  "videos/examples/0560.mp4",
+  "videos/examples/0574.mp4",
+  "videos/dynamic/0000.mp4",
+  "videos/dynamic/0008.mp4",
+  "videos/dynamic/0011.mp4",
+  "videos/dynamic/0013.mp4",
+  "videos/dynamic/0020.mp4",
+  "videos/dynamic/0034.mp4"
 ];
 
 const safePlay = (video) => {
@@ -525,6 +580,8 @@ const initHeroCarousel = () => {
   const heroVideoNext = document.getElementById("hero-video-next");
   if (!heroVideo || !heroVideoNext || heroSources.length === 0) return;
 
+  const sources = [...heroSources].sort(() => Math.random() - 0.5);
+
   const setSource = (video, src) => {
     video.src = `${assetBase}${src}`;
     video.load();
@@ -535,14 +592,14 @@ const initHeroCarousel = () => {
   let active = heroVideo;
   let inactive = heroVideoNext;
 
-  setSource(active, heroSources[current]);
+  setSource(active, sources[current]);
   active.classList.add("active");
 
-  if (heroSources.length === 1) return;
+  if (sources.length === 1) return;
 
   setInterval(() => {
-    const next = (current + 1) % heroSources.length;
-    setSource(inactive, heroSources[next]);
+    const next = (current + 1) % sources.length;
+    setSource(inactive, sources[next]);
     inactive.oncanplay = () => {
       inactive.classList.add("active");
       active.classList.remove("active");

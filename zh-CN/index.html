@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>World-R1 - 中文主页</title>
+  <title>World-R1 | 强化 3D 约束的文本到视频生成</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=block" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=block" rel="stylesheet" />
+  <link rel="icon" href="../assets/microsoft-color.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../styles.css" />
 </head>
 <body data-asset-base="../" data-lang="zh" class="home-page">
   <header class="hero-nav">
     <a class="brand" href="index.html">
-      <span class="ms-logo" aria-hidden="true">
-        <span></span><span></span><span></span><span></span>
-      </span>
-      <span>Microsoft</span>
+      <img class="brand-logo" src="../assets/microsoft-logo-svgrepo-com.svg" alt="Microsoft" />
     </a>
     <nav class="hero-nav-links">
       <a class="active" href="index.html">主页</a>
       <a href="tech.html">技术细节</a>
+      <a href="team.html">团队</a>
     </nav>
     <div class="locale-switch">
       <a href="../index.html">EN</a>
@@ -38,11 +37,11 @@
 
     <div class="hero-content">
       <h1 class="hero-project">World-R1</h1>
-      <!-- <p class="hero-title">强化 3D 约束的文本到视频生成</p> -->
+      <p class="hero-title">强化 3D 约束的文本到视频生成</p>
       <div class="hero-actions">
-        <a class="action primary" href="tech.html">技术报告</a>
-        <a class="action ghost" href="https://github.com/" target="_blank" rel="noopener noreferrer">Github</a>
-        <a class="action ghost" href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">HuggingFace</a>
+        <a class="action primary placeholder-action" href="#" aria-disabled="true">PDF</a>
+        <a class="action ghost" href="tech.html">技术细节</a>
+        <a class="action ghost" href="https://github.com/microsoft/World-R1" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
   </section>
@@ -50,7 +49,11 @@
   <main id="results" class="results-main">
     <section class="results-section">
       <div class="section-header">
-        <p class="eyebrow">结果展示</p>
+        <p class="eyebrow">视频展示</p>
+        <h2>World-R1 生成结果</h2>
+        <p class="section-intro">
+          展示 World-R1 在纯文本世界模拟分类体系与动态数据子集上的代表性生成结果。
+        </p>
       </div>
       <div id="taxonomy-sections" class="taxonomy-sections"></div>
     </section>
