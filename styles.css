@@ -52,8 +52,9 @@ video {
   height: 76px;
   padding: 0 clamp(24px, 5vw, 72px);
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(160px, 1fr) auto minmax(160px, 1fr);
   align-items: center;
+  column-gap: 24px;
   z-index: 20;
   color: #ffffff;
   background: linear-gradient(180deg, rgba(5, 8, 15, 0.72), rgba(5, 8, 15, 0.32) 72%, rgba(5, 8, 15, 0));
@@ -66,7 +67,10 @@ video {
   display: inline-flex;
   align-items: center;
   justify-self: start;
-  min-width: 150px;
+  width: 150px;
+  max-width: 150px;
+  min-width: 0;
+  overflow: hidden;
   transition: opacity 0.2s ease;
 }
 
@@ -76,8 +80,10 @@ video {
 
 .brand-logo {
   display: block;
-  width: clamp(128px, 10vw, 158px);
+  width: 146px;
+  max-width: 100%;
   height: auto;
+  flex: 0 0 auto;
 }
 
 .ms-logo {
@@ -110,7 +116,9 @@ video {
   font-size: clamp(16px, 1.05vw, 18px);
   font-weight: 650;
   justify-self: center;
+  justify-content: center;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .hero-nav-links a {
@@ -151,12 +159,14 @@ video {
 .locale-switch {
   display: inline-flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   padding-left: 18px;
   font-size: 13px;
   font-weight: 650;
   justify-self: end;
+  min-width: 150px;
 }
 
 .locale-switch a {
@@ -1006,11 +1016,13 @@ video {
   .hero-nav {
     height: 60px;
     padding: 0 12px;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 94px minmax(0, 1fr) auto;
     column-gap: 10px;
   }
 
   .brand {
+    width: 94px;
+    max-width: 94px;
     min-width: auto;
   }
 
@@ -1042,6 +1054,7 @@ video {
     font-size: 12px;
     padding-left: 10px;
     gap: 6px;
+    min-width: auto;
   }
 
   .hero-content {
