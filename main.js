@@ -375,23 +375,6 @@ const comparisonRows = [
         src: "videos/baseline_comparation/cogvideox-1.5-5b/0006.mp4"
       }
     ]
-  },
-  {
-    prompt: "Camera orbit left. A futuristic city built from crystal structures under the light of the sunset.",
-    models: [
-      {
-        name: "World-R1-Small",
-        src: "videos/baseline_comparation/world-r1-small/0019.mp4"
-      },
-      {
-        name: "Wan2.1-T2V-1.3B",
-        src: "videos/baseline_comparation/wan2.1-1.3b/0019.mp4"
-      },
-      {
-        name: "CogVideoX-1.5-5B",
-        src: "videos/baseline_comparation/cogvideox-1.5-5b/0019.mp4"
-      }
-    ]
   }
 ];
 
