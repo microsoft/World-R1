@@ -231,8 +231,8 @@ const taxonomySections = [
             prompt: "camera orbit left - diamond gemstone"
           },
           {
-            src: "videos/examples/0523.mp4",
-            prompt: "camera push in then move left - faucet close-up"
+            src: "videos/examples/1540.mp4",
+            prompt: "glowing jellyfish bell detail"
           }
         ]
       }
