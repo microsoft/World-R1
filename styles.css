@@ -608,6 +608,50 @@ video {
   margin: 10px 0 20px;
 }
 
+.video-main {
+  max-width: 1480px;
+  padding-top: 118px;
+  padding-bottom: 44px;
+}
+
+.video-intro {
+  max-width: none;
+  margin: 0 0 14px;
+  color: #d7def2;
+  font-size: clamp(15px, 1.2vw, 19px);
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.promo-video-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(60, 86, 244, 0.16), rgba(9, 13, 24, 0.92)),
+    #05070d;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+}
+
+.promo-video-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1119,6 +1163,14 @@ video {
     padding-top: 96px;
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .video-main {
+    padding-top: 88px;
+  }
+
+  .video-intro {
+    white-space: normal;
   }
 
   .tech-lead,
