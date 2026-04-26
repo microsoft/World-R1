@@ -624,7 +624,6 @@ video {
 }
 
 .promo-video-stage {
-  --promo-frame-crop: 34px;
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -637,19 +636,12 @@ video {
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
 }
 
-.promo-video-stage:hover,
-.promo-video-stage:focus-within {
-  --promo-frame-crop: 0px;
-}
-
 .promo-video-frame {
   position: absolute;
-  top: calc(var(--promo-frame-crop) * -1);
-  left: 0;
+  inset: 0;
   width: 100%;
-  height: calc(100% + (var(--promo-frame-crop) * 2));
+  height: 100%;
   border: 0;
-  transition: top 0.18s ease, height 0.18s ease;
 }
 
 .video-actions {
@@ -1065,10 +1057,6 @@ video {
 }
 
 @media (max-width: 760px) {
-  .promo-video-stage {
-    --promo-frame-crop: 0px;
-  }
-
   .hero-nav {
     height: 60px;
     padding: 0 12px;
