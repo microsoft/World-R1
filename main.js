@@ -405,6 +405,34 @@ const heroSources = [
   "videos/dynamic/0034.mp4"
 ];
 
+const configureVideo = (video, src, { lazy = false, preload = lazy ? "none" : "metadata" } = {}) => {
+  if (!video) return;
+  video.autoplay = true;
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.preload = preload;
+
+  const resolvedSrc = `${assetBase}${src}`;
+  if (lazy) {
+    video.dataset.src = resolvedSrc;
+    video.dataset.lazy = "true";
+    return;
+  }
+
+  video.src = resolvedSrc;
+};
+
+const loadVideoSource = (video, { preload = "auto" } = {}) => {
+  if (!video || video.dataset.loaded === "true") return;
+  const src = video.dataset.src;
+  if (!src) return;
+  video.preload = preload;
+  video.src = src;
+  video.dataset.loaded = "true";
+  video.load();
+};
+
 const safePlay = (video) => {
   if (!video) return;
   const promise = video.play();
@@ -421,12 +449,7 @@ const buildVideoCard = (item, chipText) => {
   shell.className = "video-shell";
 
   const video = document.createElement("video");
-  video.src = `${assetBase}${item.src}`;
-  video.autoplay = true;
-  video.muted = true;
-  video.loop = true;
-  video.playsInline = true;
-  video.preload = "metadata";
+  configureVideo(video, item.src, { lazy: true });
 
   const chip = document.createElement("span");
   chip.className = "chip";
@@ -538,12 +561,7 @@ const renderComparisons = () => {
       name.textContent = model.name;
 
       const video = document.createElement("video");
-      video.src = `${assetBase}${model.src}`;
-      video.autoplay = true;
-      video.muted = true;
-      video.loop = true;
-      video.playsInline = true;
-      video.preload = "metadata";
+      configureVideo(video, model.src, { lazy: true });
 
       card.appendChild(name);
       card.appendChild(video);
@@ -561,11 +579,12 @@ const renderComparisons = () => {
 const initHeroCarousel = () => {
   const heroVideo = document.getElementById("hero-video");
   const heroVideoNext = document.getElementById("hero-video-next");
-  if (!heroVideo || !heroVideoNext || heroSources.length === 0) return;
+  if (!heroVideo || !heroVideoNext || heroSources.length === 0) return null;
 
   const sources = [...heroSources].sort(() => Math.random() - 0.5);
 
   const setSource = (video, src) => {
+    video.preload = "auto";
     video.src = `${assetBase}${src}`;
     video.load();
     safePlay(video);
@@ -578,7 +597,7 @@ const initHeroCarousel = () => {
   setSource(active, sources[current]);
   active.classList.add("active");
 
-  if (sources.length === 1) return;
+  if (sources.length === 1) return active;
 
   setInterval(() => {
     const next = (current + 1) % sources.length;
@@ -593,11 +612,13 @@ const initHeroCarousel = () => {
       inactive.oncanplay = null;
     };
   }, 9000);
+
+  return active;
 };
 
+const heroLeadVideo = initHeroCarousel();
 renderTaxonomySections();
 renderComparisons();
-initHeroCarousel();
 
 const homeNav = document.querySelector(".home-page .hero-nav");
 const heroSection = document.querySelector(".home-page .hero");
@@ -615,14 +636,100 @@ if (homeNav && heroSection) {
 }
 
 const videos = Array.from(document.querySelectorAll("video"));
+const lazyVideos = videos.filter((video) => video.dataset.lazy === "true");
+
+const activateVideo = (video) => {
+  loadVideoSource(video, { preload: "auto" });
+  safePlay(video);
+};
+
+const isMostlyVisible = (video) => {
+  const rect = video.getBoundingClientRect();
+  if (rect.width <= 0 || rect.height <= 0) return false;
+
+  const visibleWidth = Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0);
+  const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+  return visibleWidth / rect.width > 0.25 && visibleHeight / rect.height > 0.25;
+};
+
+const isBufferedToEnd = (video) => {
+  if (!video || !Number.isFinite(video.duration) || video.duration <= 0) return false;
+  if (!video.buffered || video.buffered.length === 0) return false;
+  return video.buffered.end(video.buffered.length - 1) >= video.duration - 0.25;
+};
+
+const initBackgroundPreload = (heroVideo) => {
+  if (!heroVideo || lazyVideos.length === 0) return;
+
+  let started = false;
+  let cursor = 0;
+  let inFlight = 0;
+  const maxConcurrent = 2;
+
+  const maybeStart = () => {
+    if (started) return;
+    if (heroVideo.readyState < HTMLMediaElement.HAVE_ENOUGH_DATA && !isBufferedToEnd(heroVideo)) return;
+    started = true;
+    heroVideo.removeEventListener("loadeddata", maybeStart);
+    heroVideo.removeEventListener("progress", maybeStart);
+    pump();
+  };
+
+  const pump = () => {
+    while (started && inFlight < maxConcurrent && cursor < lazyVideos.length) {
+      const video = lazyVideos[cursor++];
+      if (video.dataset.loaded === "true") continue;
+
+      inFlight += 1;
+      loadVideoSource(video, { preload: "auto" });
+
+      let released = false;
+      const release = () => {
+        if (released) return;
+        released = true;
+        video.removeEventListener("loadeddata", release);
+        video.removeEventListener("canplay", release);
+        video.removeEventListener("error", release);
+        inFlight = Math.max(0, inFlight - 1);
+        pump();
+      };
+
+      video.addEventListener("loadeddata", release, { once: true });
+      video.addEventListener("canplay", release, { once: true });
+      video.addEventListener("error", release, { once: true });
+      window.setTimeout(release, 1200);
+    }
+  };
+
+  heroVideo.addEventListener("loadeddata", maybeStart);
+  heroVideo.addEventListener("progress", maybeStart);
+  heroVideo.addEventListener("canplaythrough", maybeStart, { once: true });
+  maybeStart();
+};
+
+initBackgroundPreload(heroLeadVideo);
 
 if ("IntersectionObserver" in window) {
+  const loadObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        loadVideoSource(entry.target, { preload: "auto" });
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "600px 0px",
+      threshold: 0.01
+    }
+  );
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         const video = entry.target;
         if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
-          safePlay(video);
+          activateVideo(video);
         } else {
           video.pause();
         }
@@ -631,15 +738,26 @@ if ("IntersectionObserver" in window) {
     { threshold: [0, 0.25, 0.6] }
   );
 
-  videos.forEach((video) => observer.observe(video));
+  videos.forEach((video) => {
+    observer.observe(video);
+    if (video.dataset.lazy === "true") {
+      loadObserver.observe(video);
+    }
+  });
 } else {
-  videos.forEach((video) => safePlay(video));
+  videos.forEach((video) => activateVideo(video));
 }
 
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
     videos.forEach((video) => video.pause());
   } else {
-    videos.forEach((video) => safePlay(video));
+    videos.forEach((video) => {
+      if (isMostlyVisible(video)) {
+        activateVideo(video);
+      } else {
+        video.pause();
+      }
+    });
   }
 });
