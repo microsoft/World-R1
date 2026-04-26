@@ -624,6 +624,7 @@ video {
 }
 
 .promo-video-stage {
+  --promo-frame-crop: 34px;
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -636,12 +637,19 @@ video {
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
 }
 
+.promo-video-stage:hover,
+.promo-video-stage:focus-within {
+  --promo-frame-crop: 0px;
+}
+
 .promo-video-frame {
   position: absolute;
-  inset: 0;
+  top: calc(var(--promo-frame-crop) * -1);
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + (var(--promo-frame-crop) * 2));
   border: 0;
+  transition: top 0.18s ease, height 0.18s ease;
 }
 
 .video-actions {
@@ -711,8 +719,8 @@ video {
 }
 
 .team-card {
-  min-height: 150px;
-  padding: 18px;
+  min-height: 118px;
+  padding: 15px 16px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
     var(--dark-panel);
@@ -727,10 +735,10 @@ video {
 .team-name {
   display: inline-block;
   color: #f2f6ff;
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 720;
   line-height: 1.2;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .team-name:hover {
@@ -740,8 +748,8 @@ video {
 .team-meta {
   color: #b9c4df;
   font-size: 14px;
-  line-height: 1.55;
-  margin-bottom: 16px;
+  line-height: 1.45;
+  margin-bottom: 0;
 }
 
 .team-meta sup {
@@ -1057,6 +1065,10 @@ video {
 }
 
 @media (max-width: 760px) {
+  .promo-video-stage {
+    --promo-frame-crop: 0px;
+  }
+
   .hero-nav {
     height: 60px;
     padding: 0 12px;
