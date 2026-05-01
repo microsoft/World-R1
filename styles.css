@@ -526,6 +526,13 @@ video {
   margin-bottom: 10px;
 }
 
+.tech-publication {
+  color: #cfd8ff;
+  font-size: 15px;
+  font-weight: 650;
+  margin-bottom: 14px;
+}
+
 .tech-lead {
   color: #d7def2;
   font-size: 16px;
