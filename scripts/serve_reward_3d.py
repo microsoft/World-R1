@@ -1,10 +1,8 @@
-import pickle
 import os
 import argparse
-import traceback
 import signal
 import sys
-from reward_server.reward_3d import MultiGPUReward3DManager
+from reward_server.protocol import decode_reward_3d_request
 
 # import debugpy
 # try:
@@ -15,7 +13,7 @@ from reward_server.reward_3d import MultiGPUReward3DManager
 # except Exception as e:
 #     pass
 
-from flask import Flask, request, Blueprint
+from flask import Blueprint, Flask, current_app, jsonify, request
 
 root = Blueprint("root", __name__)
 
@@ -29,15 +27,20 @@ def signal_handler(sig, frame):
         reward_3d_manager.shutdown()
     sys.exit(0)
 
-def create_app(scorer_type='qwen', use_lpips=True):
+def create_app(scorer_type='qwen', use_lpips=True, manager=None, install_signal_handlers=True):
     global reward_3d_manager
-    print(f"Initializing multi-GPU 3D reward server (scorer: {scorer_type}, lpips: {use_lpips})...")
-    reward_3d_manager = MultiGPUReward3DManager(scorer_type=scorer_type, use_lpips=use_lpips)
-    reward_3d_manager.initialize()
+    if manager is None:
+        from reward_server.reward_3d import MultiGPUReward3DManager
+
+        print(f"Initializing multi-GPU 3D reward server (scorer: {scorer_type}, lpips: {use_lpips})...")
+        manager = MultiGPUReward3DManager(scorer_type=scorer_type, use_lpips=use_lpips)
+        manager.initialize()
+    reward_3d_manager = manager
 
     # Register signal handlers for graceful shutdown
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
+    if install_signal_handlers:
+        signal.signal(signal.SIGINT, signal_handler)
+        signal.signal(signal.SIGTERM, signal_handler)
 
     app = Flask(__name__)
     app.register_blueprint(root)
@@ -46,20 +49,22 @@ def create_app(scorer_type='qwen', use_lpips=True):
 @root.route("/", methods=["POST"])
 def inference():
     print(f"received POST request from {request.remote_addr}")
-    data = request.get_data()
+    if not request.is_json:
+        return jsonify({"error": "Request body must be JSON"}), 400
 
     try:
         # expects a dict with "videos" and "prompts"
         # videos: List[List[bytes]] - outer list is batch_size, inner list is frames per video
         # prompts: List[str] - text prompts for each video
-        data = pickle.loads(data)
-
-        batch_videos = data["videos"]  # List[List[bytes]]
-        batch_prompts = data["prompts"]  # List[str]
-        batch_camera_trajectories = data.get("camera_trajectories")
+        batch_videos, batch_prompts, batch_camera_trajectories = decode_reward_3d_request(
+            request.get_json(silent=True)
+        )
         batch_size = len(batch_videos)
         print(f"Got batch of size {batch_size} for 3D reward evaluation")
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
 
+    try:
         global reward_3d_manager
         if reward_3d_manager is None:
             print("Error: 3D reward server is not initialized")
@@ -75,20 +80,13 @@ def inference():
 
         print(f"3D reward batch processing results: {outputs}")
 
-        response = {"outputs": outputs, "details": details}
-
-        # returns: a dict with "outputs"
-        # outputs: List of scores (float values) with length = batch_size
-        response = pickle.dumps(response)
-
-        returncode = 200
+        return jsonify({
+            "outputs": [float(output) for output in outputs],
+            "details": details,
+        }), 200
     except Exception:
-        response = traceback.format_exc()
-        print(response)
-        response = response.encode("utf-8")
-        returncode = 500
-
-    return response, returncode
+        current_app.logger.exception("3D reward computation failed")
+        return jsonify({"error": "3D reward computation failed"}), 500
 
 
 HOST = "127.0.0.1"
