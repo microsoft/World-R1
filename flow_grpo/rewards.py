@@ -7,7 +7,6 @@ Source note:
 """
 
 import os
-import pickle
 from io import BytesIO
 
 import numpy as np
@@ -15,6 +14,8 @@ import requests
 import torch
 from PIL import Image
 from requests.adapters import HTTPAdapter, Retry
+
+from reward_server.protocol import encode_general_request, encode_reward_3d_request
 
 REWARD_3D = "reward_3d"
 REWARD_GENERAL = "reward_general"
@@ -117,13 +118,14 @@ def remote_reward_3d(device):
         for video_batch, prompt_batch, trajectory_batch in zip(
             videos_batched, prompts_batched, camera_trajectories_batched
         ):
-            data = {
-                "videos": video_batch,
-                "prompts": prompt_batch,
-                "camera_trajectories": trajectory_batch,
-            }
-            response = sess.post(url, data=pickle.dumps(data), timeout=2000)
-            response_data = pickle.loads(response.content)
+            payload = encode_reward_3d_request(
+                video_batch,
+                prompt_batch,
+                trajectory_batch,
+            )
+            response = sess.post(url, json=payload, timeout=2000)
+            response.raise_for_status()
+            response_data = response.json()
             all_scores += response_data["outputs"]
             if response_data.get("details"):
                 all_reconstruction_scores += [float(item["gs_score"]) for item in response_data["details"]]
@@ -195,9 +197,10 @@ def remote_reward_general(device):
 
         all_scores = []
         for image_batch, prompt_batch in zip(images_batched, prompts_batched):
-            data = {"images": image_batch, "prompts": prompt_batch}
-            response = sess.post(url, data=pickle.dumps(data), timeout=1000)
-            response_data = pickle.loads(response.content)
+            payload = encode_general_request(image_batch, prompt_batch)
+            response = sess.post(url, json=payload, timeout=1000)
+            response.raise_for_status()
+            response_data = response.json()
             all_scores += response_data["outputs"]
 
         return all_scores, {}

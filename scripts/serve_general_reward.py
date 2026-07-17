@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
 import argparse
 import os
-import pickle
-import traceback
 
-from flask import Blueprint, Flask, request
+from flask import Blueprint, Flask, current_app, jsonify, request
 
-from reward_server.general_reward import MultiGPUGeneralRewardManager
+from reward_server.protocol import decode_general_request
 
 root = Blueprint("root", __name__)
 general_reward_manager = None
 
 
-def create_app():
+def create_app(manager=None):
     global general_reward_manager
-    general_reward_manager = MultiGPUGeneralRewardManager()
-    general_reward_manager.initialize()
+    if manager is None:
+        from reward_server.general_reward import MultiGPUGeneralRewardManager
+
+        manager = MultiGPUGeneralRewardManager()
+        manager.initialize()
+    general_reward_manager = manager
     app = Flask(__name__)
     app.register_blueprint(root)
     return app
@@ -23,22 +25,26 @@ def create_app():
 
 @root.route("/", methods=["POST"])
 def inference():
-    data = request.get_data()
-    try:
-        payload = pickle.loads(data)
-        batch_images = payload["images"]
-        batch_prompts = payload["prompts"]
-        batch_size = len(batch_images)
+    if not request.is_json:
+        return jsonify({"error": "Request body must be JSON"}), 400
 
+    try:
+        batch_images, batch_prompts = decode_general_request(request.get_json(silent=True))
+        batch_size = len(batch_images)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
+
+    try:
         global general_reward_manager
         if general_reward_manager is None:
             outputs = [0.5] * batch_size
         else:
             outputs = general_reward_manager.compute_batch_scores(batch_images, batch_prompts)
 
-        return pickle.dumps({"outputs": outputs}), 200
+        return jsonify({"outputs": [float(output) for output in outputs]}), 200
     except Exception:
-        return traceback.format_exc().encode("utf-8"), 500
+        current_app.logger.exception("General reward computation failed")
+        return jsonify({"error": "General reward computation failed"}), 500
 
 
 HOST = "127.0.0.1"
